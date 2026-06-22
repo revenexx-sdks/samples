@@ -1,0 +1,46 @@
+# Secrets / local config — never commit
+.env
+*.env
+!.env.example
+
+# Node / Web / CLI
+node_modules/
+dist/
+*.tsbuildinfo
+
+# PHP
+vendor/
+composer.lock
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Go
+# (build artifacts only; go.sum is committed)
+
+# Rust
+target/
+
+# Apple / Swift
+.build/
+*.xcodeproj
+.swiftpm/
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+
+# Android / Gradle
+.gradle/
+local.properties
+*.iml
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store

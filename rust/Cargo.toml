@@ -1,0 +1,9 @@
+[package]
+name = "revenexx-sample-rust"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+revenexx = "0.0.1"
+tokio = { version = "1", features = ["full"] }

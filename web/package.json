@@ -1,0 +1,20 @@
+{
+  "name": "revenexx-sample-web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal example app for the Revenexx Web SDK (@revenexx/sdk).",
+  "scripts": {
+    "start": "tsx index.ts",
+    "workflow": "tsx workflow.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@revenexx/sdk": "^0.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}

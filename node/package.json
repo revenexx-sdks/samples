@@ -1,0 +1,14 @@
+{
+  "name": "revenexx-sample-node",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Minimal example app for the Revenexx Node SDK (@revenexx/node).",
+  "scripts": {
+    "start": "node index.js",
+    "workflow": "node workflow.js",
+    "typecheck": "node --check index.js && node --check workflow.js"
+  },
+  "dependencies": {
+    "@revenexx/node": "^0.0.2"
+  }
+}

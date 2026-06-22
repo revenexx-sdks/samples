@@ -1,0 +1,43 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.example.revenexxsample'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.example.revenexxsample'
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName '0.0.0'
+
+        // Config is injected at build time from environment variables.
+        buildConfigField 'String', 'REVENEXX_API_URL', "\"${System.getenv('REVENEXX_API_URL') ?: 'https://api.revenexx.com'}\""
+        buildConfigField 'String', 'REVENEXX_TENANT', "\"${System.getenv('REVENEXX_TENANT') ?: ''}\""
+        buildConfigField 'String', 'REVENEXX_API_KEY', "\"${System.getenv('REVENEXX_API_KEY') ?: ''}\""
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+    implementation 'com.revenexx:android:0.0.1'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.activity:activity-ktx:1.9.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
+}

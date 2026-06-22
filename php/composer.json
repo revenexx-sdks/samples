@@ -1,0 +1,10 @@
+{
+    "name": "revenexx/sample-php",
+    "description": "Minimal example app for the Revenexx PHP SDK.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0.0",
+        "revenexx/sdk": "^0.0.3"
+    }
+}
