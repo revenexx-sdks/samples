@@ -176,6 +176,34 @@ await products.productsCategoriesDelete({ id: category.id! });
 > channels, markets, payment methods & providers, shipping methods, price lists, inventory stock,
 > attributes, families, and so on.
 
+## Pagination
+
+List endpoints are paginated: every response carries a `page` object —
+`{ limit, offset, returned, total, hasMore }` — and accepts `limit`/`offset` query params. The
+**web** sample has a runnable example ([`web/pagination.ts`](web/pagination.ts)) that walks every
+page of products until `hasMore` is false:
+
+```bash
+cd web && npm run paginate
+```
+
+```ts
+let offset = 0;
+const limit = 25;
+for (;;) {
+  const res = (await products.productsList({ limit, offset })) as {
+    items?: unknown[];
+    page?: { hasMore?: boolean };
+  };
+  // …process res.items…
+  if (!res.page?.hasMore || (res.items?.length ?? 0) === 0) break;
+  offset += limit;
+}
+```
+
+> The `limit`/`offset` params arrive as each SDK is regenerated from the current spec — the web SDK
+> (`@revenexx/sdk@0.0.12`) has them today; the others gain them on their next publish.
+
 ## Publish status
 
 All ten SDKs will be published to their registries by launch. All npm packages are live (web, node,
@@ -185,7 +213,7 @@ at the dependency-resolution step — that's expected, not a sample bug.
 
 | SDK | Registry | Installable today? |
 |---|---|---|
-| web | npm `@revenexx/sdk@0.0.5` | ✅ published |
+| web | npm `@revenexx/sdk@0.0.12` | ✅ published |
 | node | npm `@revenexx/node@0.0.2` | ✅ published |
 | cli | npm `@revenexx/cli@0.0.4` | ✅ published |
 | php | Packagist `revenexx/sdk@0.0.3` | ✅ published |
@@ -217,8 +245,9 @@ server-side. This sample runs server-side (Node) for simplicity. Code: [`web/ind
   npm install
   npm start            # read-only tour (index.ts via tsx)
   npm run workflow     # write workflow: cart → order → payment (workflow.ts)
+  npm run paginate     # page through all products via limit/offset (pagination.ts)
   ```
-- **Build check (no live calls):** `npm run typecheck` (`tsc --noEmit`, covers both files)
+- **Build check (no live calls):** `npm run typecheck` (`tsc --noEmit`, covers all three files)
 
 > **Auth:** set `REVENEXX_JWT` to run as a signed-in user via `setBearerAuth` (the production
 > browser path); otherwise the sample falls back to `REVENEXX_API_KEY`. Never ship an API key to the

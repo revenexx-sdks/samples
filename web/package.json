@@ -7,10 +7,11 @@
   "scripts": {
     "start": "tsx index.ts",
     "workflow": "tsx workflow.ts",
+    "paginate": "tsx pagination.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@revenexx/sdk": "^0.0.5"
+    "@revenexx/sdk": "^0.0.12"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
