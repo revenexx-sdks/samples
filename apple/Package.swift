@@ -13,7 +13,7 @@ let package = Package(
         .executableTarget(
             name: "RevenexxSample",
             dependencies: [
-                .product(name: "RevenexxAPIRevenexx", package: "apple")
+                .product(name: "Revenexx", package: "apple")
             ]
         ),
     ]

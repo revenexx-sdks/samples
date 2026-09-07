@@ -17,12 +17,13 @@ onboarding glue, not generator output.
 | [`node/`](node/) | `@revenexx/node` | npm | [Node](#node) |
 | [`cli/`](cli/) | `@revenexx/cli` | npm | [CLI](#cli) |
 | [`php/`](php/) | `revenexx/sdk` | Packagist | [PHP](#php) |
-| [`python/`](python/) | `revenexx_revenexx` | PyPI | [Python](#python) |
+| [`python/`](python/) | `revenexx` | PyPI | [Python](#python) |
 | [`go/`](go/) | `github.com/revenexx-sdks/go` | Go module proxy (git tags) | [Go](#go) |
 | [`rust/`](rust/) | `revenexx` | crates.io | [Rust](#rust) |
-| [`apple/`](apple/) | `RevenexxAPIRevenexx` | SwiftPM (git tags) | [Apple](#apple) |
+| [`apple/`](apple/) | `Revenexx` (from `revenexx-sdks/apple`) | SwiftPM (git tags) | [Apple](#apple) |
+| [`swift/`](swift/) | `Revenexx` (from `revenexx-sdks/swift`, server-side) | SwiftPM (git tags) | [Swift](#swift) |
 | [`flutter/`](flutter/) | `revenexx` | pub.dev | [Flutter](#flutter) |
-| [`android/`](android/) | `com.revenexx:android` | Maven Central | [Android](#android) |
+| [`android/`](android/) | `com.revenexx:revenexx-android` | Maven Central | [Android](#android) |
 
 ## Configuration
 
@@ -89,6 +90,10 @@ The same tour, in order, across all SDKs (all read-only calls; an empty tenant i
 16. `sitesList`
 17. `appsList`
 18. `messagingListTopics`
+
+The Apple and Swift samples are written against the current SDK generation, where the service
+classes are split per resource (`ProductsCategories`, `PaymentsProviders`, `InventoriesStock`, …) and
+`messagingListTopics` no longer exists — they call `channelIndex` (messaging channels) for step 18.
 
 (Method names shown in camelCase; Python/Rust use `snake_case`, Go uses `PascalCase`, the CLI uses
 kebab subcommands.)
@@ -213,14 +218,15 @@ at the dependency-resolution step — that's expected, not a sample bug.
 
 | SDK | Registry | Installable today? |
 |---|---|---|
-| web | npm `@revenexx/sdk@0.0.12` | ✅ published |
-| node | npm `@revenexx/node@0.0.2` | ✅ published |
-| cli | npm `@revenexx/cli@0.0.4` | ✅ published |
-| php | Packagist `revenexx/sdk@0.0.3` | ✅ published |
+| web | npm `@revenexx/sdk@0.1.0` | ✅ published |
+| node | npm `@revenexx/node@0.1.0` | ✅ published |
+| cli | npm `@revenexx/cli@0.4.0` | ✅ published |
+| php | Packagist `revenexx/sdk@0.1.1` | ✅ published |
 | python | PyPI | ⏳ pending PyPI publish |
 | go | git tags / module proxy | ⏳ pending first tag |
 | rust | crates.io | ⏳ pending crates.io publish |
 | apple | SwiftPM git tags | ⏳ pending first tag |
+| swift | SwiftPM git tags | ⏳ pending first tag |
 | flutter | pub.dev | ⏳ pending pub.dev publish |
 | android | Maven Central | ⏳ pending Sonatype publish |
 
@@ -345,7 +351,7 @@ Code: [`php/index.php`](php/index.php).
 
 ## Apple
 
-`RevenexxAPIRevenexx` — Swift, consumed via Swift Package Manager from git tags. The sample is a
+`Revenexx` (package `revenexx-sdks/apple`) — Swift for iOS, macOS, watchOS and tvOS, consumed via Swift Package Manager from git tags. The sample is a
 small command-line executable, so it builds and runs with plain `swift` (no Xcode project). Code:
 [`apple/Sources/RevenexxSample/RevenexxSample.swift`](apple/Sources/RevenexxSample/RevenexxSample.swift).
 
@@ -360,6 +366,22 @@ small command-line executable, so it builds and runs with plain `swift` (no Xcod
 
 > In a shipping iOS app, authenticate with a per-user bearer JWT via
 > `client.setBearerAuth("Bearer <jwt>")`, not an embedded API key.
+
+## Swift
+
+`Revenexx` (package `revenexx-sdks/swift`) — the server-side Swift SDK, consumed via Swift Package
+Manager from git tags. Same API surface as the Apple SDK without the iOS/watchOS/tvOS platform
+targets. The sample is a small command-line executable. Code:
+[`swift/Sources/RevenexxSample/RevenexxSample.swift`](swift/Sources/RevenexxSample/RevenexxSample.swift).
+
+- **Prerequisites:** Swift 5.7+ (macOS or Linux toolchain)
+- **Run:**
+  ```bash
+  cd swift
+  swift run
+  ```
+  The dependency is pinned to `from: "0.0.1"` in `Package.swift`.
+- **Build check (no live calls):** `swift build`
 
 ## Flutter
 
